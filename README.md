@@ -127,6 +127,18 @@ Se incluye `.env.example` como plantilla.
 
 ## Capturas de pantalla
 
-> Agregar aqui las capturas de: pagina principal, listado de usuarios,
-> formulario de creacion, detalle de usuario y buscador HTMX en accion.
+### Pagina principal
+![Pagina principal](docs/screenshots/inicio.png)
+
+### Listado de usuarios
+![Listado de usuarios](docs/screenshots/usuarios.png)
+
+### Formulario de creacion
+![Formulario de creacion](docs/screenshots/nuevo-usuario.png)
+
+### Detalle de usuario
+![Detalle de usuario](docs/screenshots/detalle.png)
+
+### Buscador con HTMX
+![Buscador HTMX](docs/screenshots/buscador.png)
 
