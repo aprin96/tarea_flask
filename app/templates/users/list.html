@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Usuarios</h1>
+        <a class="btn btn-primary" href="{{ url_for('users.new_user_form') }}">+ Nuevo usuario</a>
+    </div>
+
+    {% if users %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.dni }}</td>
+                    <td>{{ user.given_name }}</td>
+                    <td>{{ user.family_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td class="actions">
+                        <a href="{{ url_for('users.user_detail', user_id=user.id) }}">Ver</a>
+                        <a href="{{ url_for('users.edit_user_form', user_id=user.id) }}">Editar</a>
+                        <form action="{{ url_for('users.delete_user', user_id=user.id) }}"
+                              method="post"
+                              onsubmit="return confirm('¿Eliminar este usuario?');">
+                            <button type="submit" class="link-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay usuarios registrados todavia.</p>
+    {% endif %}
+{% endblock %}

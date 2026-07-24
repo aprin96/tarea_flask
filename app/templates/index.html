@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Tarea 01{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido</h1>
+    <p>
+        Esta es una aplicacion Flask desarrollada para la Tarea 01.
+        Permite gestionar usuarios mediante un CRUD completo y consultar
+        un buscador dinamico construido con HTMX.
+    </p>
+
+    <div class="cards">
+        <a class="card" href="{{ url_for('users.list_users') }}">
+            <h2>Ver usuarios</h2>
+            <p>Listado, creacion, edicion y eliminacion de usuarios.</p>
+        </a>
+        <a class="card" href="{{ url_for('main.buscador') }}">
+            <h2>Buscador HTMX</h2>
+            <p>Busca usuarios por nombre sin recargar la pagina.</p>
+        </a>
+    </div>
+{% endblock %}

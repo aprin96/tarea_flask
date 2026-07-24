@@ -1,0 +1,112 @@
+:root {
+    --color-primary: #2563eb;
+    --color-text: #1e293b;
+    --color-border: #e2e8f0;
+    --color-bg: #f8fafc;
+    --color-error: #dc2626;
+    --color-success: #16a34a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: white;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar .brand { font-weight: bold; text-decoration: none; color: var(--color-primary); }
+.navbar nav a { margin-left: 1.5rem; text-decoration: none; color: var(--color-text); }
+
+.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+.cards { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.card {
+    flex: 1;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--color-text);
+}
+.card:hover { border-color: var(--color-primary); }
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.table { width: 100%; border-collapse: collapse; background: white; }
+.table th, .table td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.table .actions a, .table .actions button {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    background: white;
+    cursor: pointer;
+}
+.btn-primary { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+
+.form { display: flex; flex-direction: column; max-width: 420px; }
+.form label { margin-top: 0.8rem; font-weight: 600; }
+.form input {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin-top: 0.3rem;
+}
+.form-actions { margin-top: 1.5rem; display: flex; gap: 0.8rem; }
+
+.detail-list { display: grid; grid-template-columns: 150px 1fr; row-gap: 0.6rem; }
+.detail-list dt { font-weight: 600; }
+
+.flash {
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+.flash-success { background: #dcfce7; color: var(--color-success); }
+.flash-error { background: #fee2e2; color: var(--color-error); }
+
+.link-danger {
+    background: none;
+    border: none;
+    color: var(--color-error);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+#buscador-input, input[name="given_name"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Buscador de usuarios (HTMX){% endblock %}
+
+{% block content %}
+    <h1>Buscador de usuarios</h1>
+    <p>Escribe un nombre: la tabla se actualiza sola, sin recargar la pagina (HTMX).</p>
+
+    <input
+        type="text"
+        name="given_name"
+        placeholder="Buscar por nombre..."
+        autocomplete="off"
+        hx-get="{{ url_for('api.api_search_users') }}"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#resultados"
+        hx-swap="innerHTML">
+
+    <div id="resultados" class="results">
+        <p>Escribe algo para buscar...</p>
+    </div>
+
+    <script>
+        /**
+         * El endpoint /api/users/search devuelve JSON (requerimiento de la API),
+         * pero HTMX espera HTML para insertar en el DOM.
+         * Con el evento htmx:beforeSwap tomamos ese JSON y lo transformamos
+         * en la tabla HTML antes de que HTMX la inserte en #resultados.
+         */
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.pathInfo.requestPath.startsWith('/api/users/search')) {
+                const usuarios = JSON.parse(evt.detail.xhr.responseText);
+                evt.detail.serverResponse = renderizarUsuarios(usuarios);
+                evt.detail.shouldSwap = true;
+            }
+        });
+
+        function renderizarUsuarios(usuarios) {
+            if (!usuarios.length) {
+                return '<p>No se encontraron usuarios.</p>';
+            }
+
+            const filas = usuarios.map(u => `
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.given_name}</td>
+                    <td>${u.family_name}</td>
+                    <td>${u.email}</td>
+                </tr>
+            `).join('');
+
+            return `
+                <table class="table">
+                    <thead>
+                        <tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Email</th></tr>
+                    </thead>
+                    <tbody>${filas}</tbody>
+                </table>
+            `;
+        }
+    </script>
+{% endblock %}

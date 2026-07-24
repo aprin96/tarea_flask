@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Editar' if is_edit else 'Nuevo' }} usuario{% endblock %}
+
+{% block content %}
+    <h1>{{ 'Editar usuario' if is_edit else 'Nuevo usuario' }}</h1>
+
+    {% if errors %}
+        <div class="flash flash-error">
+            <ul>
+                {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post"
+          action="{{ url_for('users.update_user', user_id=user_id) if is_edit else url_for('users.create_user') }}"
+          class="form">
+
+        <label for="dni">DNI</label>
+        <input type="text" id="dni" name="dni" value="{{ user.dni if user else '' }}" required>
+
+        <label for="given_name">Nombre</label>
+        <input type="text" id="given_name" name="given_name" value="{{ user.given_name if user else '' }}" required>
+
+        <label for="family_name">Apellido</label>
+        <input type="text" id="family_name" name="family_name" value="{{ user.family_name if user else '' }}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ user.email if user else '' }}" required>
+
+        <label for="phone_number">Telefono</label>
+        <input type="text" id="phone_number" name="phone_number" value="{{ user.phone_number if user else '' }}">
+
+        <label for="address">Direccion</label>
+        <input type="text" id="address" name="address" value="{{ user.address if user else '' }}">
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{{ url_for('users.list_users') }}" class="btn">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}
